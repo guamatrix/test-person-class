@@ -77,53 +77,56 @@ const sex = prompt('Please enter your sex (M or F)');
 const height = prompt('Please enter your height (Mts)');
 const weight = prompt('Please enter your weight (Kg)');
 
-const PersonOne = new Person(name, age, sex, weight, height);
-const PersonTwo = new Person(name, age, sex);
-const PersonThree = new Person();
+if (name && age && sex && height && weight) {
+  const PersonOne = new Person(name, age, sex, weight, height);
+  const PersonTwo = new Person(name, age, sex);
+  const PersonThree = new Person();
 
-PersonThree.setName(name);
-PersonThree.setAge(age);
-PersonThree.setSex(sex);
-PersonThree.setHeight(height);
-PersonThree.setWeight(weight);
 
-const isYesorNot = (value) => {
-    return value === 1 ? 'Yes' : 'Not';
+  PersonThree.setName(name);
+  PersonThree.setAge(age);
+  PersonThree.setSex(sex);
+  PersonThree.setHeight(height);
+  PersonThree.setWeight(weight);
+
+  const isYesorNot = (value) => {
+      return value === 1 ? 'Yes' : 'Not';
+  }
+
+  const getIMC = (value) => {
+      return value === 0 ? 'Ideal Weight' : value === 1 ? 'Overwight' : 'Underweight';
+  }
+
+  document.getElementById('data').innerHTML = `
+	  <table>
+	    <thead>
+		<tr>
+		    <th>Person Class</th>
+		    <th>Is Adult</th>
+		    <th>IMC Information</th>
+		    <th>Attributes Information</th>
+		  </tr>
+	    </thead>
+	      <tbody>
+		  <tr>
+		      <td>Person One</td>
+		      <td>${isYesorNot(PersonOne.isAdult())}</td>
+		      <td>${getIMC(PersonOne.calculateIMC())}</td>
+		      <td>${PersonOne.toString()}</td>  
+		  </tr>
+		  <tr>
+		      <td>Person Two</td>
+		      <td>${isYesorNot(PersonTwo.isAdult())}</td>
+		      <td>${getIMC(PersonTwo.calculateIMC())}</td>
+		      <td>${PersonTwo.toString()}</td>  
+		  </tr>
+		  <tr>
+		      <td>Person Three</td>
+		      <td>${isYesorNot(PersonThree.isAdult())}</td>
+		      <td>${getIMC(PersonThree.calculateIMC())}</td>
+		      <td>${PersonThree.toString()}</td>  
+		  </tr>                
+	      </tbody>
+	  </table>    
+  `;
 }
-
-const getIMC = (value) => {
-    return value === 0 ? 'Ideal Weight' : value === 1 ? 'Overwight' : 'Underweight';
-}
-
-document.getElementById('data').innerHTML = `
-        <table>
-           <thead>
-               <tr>
-                   <th>Person Class</th>
-                   <th>Is Adult</th>
-                   <th>IMC Information</th>
-                   <th>Attributes Information</th>
-                </tr>
-           </thead>
-            <tbody>
-                <tr>
-                    <td>Person One</td>
-                    <td>${isYesorNot(PersonOne.isAdult())}</td>
-                    <td>${getIMC(PersonOne.calculateIMC())}</td>
-                    <td>${PersonOne.toString()}</td>  
-                </tr>
-                <tr>
-                    <td>Person Two</td>
-                    <td>${isYesorNot(PersonTwo.isAdult())}</td>
-                    <td>${getIMC(PersonTwo.calculateIMC())}</td>
-                    <td>${PersonTwo.toString()}</td>  
-                </tr>
-                <tr>
-                    <td>Person Three</td>
-                    <td>${isYesorNot(PersonThree.isAdult())}</td>
-                    <td>${getIMC(PersonThree.calculateIMC())}</td>
-                    <td>${PersonThree.toString()}</td>  
-                </tr>                
-            </tbody>
-        </table>    
-`;
